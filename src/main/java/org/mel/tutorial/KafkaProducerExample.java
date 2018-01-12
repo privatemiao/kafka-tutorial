@@ -10,8 +10,8 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
 
 public class KafkaProducerExample {
-    private static final String TOPIC = "my-example-topic";
-    private final static String BOOTSTRAP_SERVERS = "kafka.example.com:9092";
+    private static final String TOPIC = "test";
+    private final static String BOOTSTRAP_SERVERS = "node2:9092";
 
     private static Producer<Long, String> createProducer() {
         Properties props = new Properties();
@@ -22,7 +22,7 @@ public class KafkaProducerExample {
         return new KafkaProducer<>(props);
     }
 
-    static void runProducer(final int sendMessageCount) throws Exception {
+    static void runProducer(final int sendMessageCount) {
         final Producer<Long, String> producer = createProducer();
 
         long time = System.currentTimeMillis();
@@ -52,6 +52,6 @@ public class KafkaProducerExample {
     }
 
     public static void main(String[] args) throws Exception {
-        runProducer(10000);
+        runProducer(10);
     }
 }

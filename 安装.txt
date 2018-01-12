@@ -1,0 +1,28 @@
+
+           ______________________________________
+  ________|                                      |_______
+  \       |                Kafka                 |      /
+   \      |             2018-01-12               |     /
+   /      |______________________________________|     \
+  /__________)                                (_________\
+  
+  
+1、server.properties
+	>broker.id=0					当前机器唯一号
+	>listeners=PLAINTEXT://node2.example.com:9092				当前机器名
+	>#message.max.byte
+	>#default.replication.factor=2   每个主题每个partition的副本
+	>#replica.fetch.max.bytes=
+	>zookeeper.connect=
+	>log.dirs=						日志存放位置
+	>num.partitions=2				每个主题的分区数
+
+2、验证
+    >创建主题
+        kafka-topics.sh --create --zookeeper node2:2181 --replication-factor 2 --partitions 1 --topic test
+    >查看主题
+        kafka-topics.sh --list --zookeeper node2:2181
+    >发送信息
+        kafka-console-producer.sh --broker-list node2:9092 --topic test
+    >消费信息
+        kafka-console-consumer.sh --bootstrap-server node4:9092 --topic test --from-beginning
